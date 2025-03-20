@@ -12,3 +12,4 @@ print([num for num in a if num < 5])
 #3
 x = int(input("enter number: "))
 print([num for num in a if num < x])
+
