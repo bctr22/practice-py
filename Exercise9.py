@@ -1,28 +1,24 @@
-import random  
-choices = list(range(1, 10))
+import random
 
 while True:
-    player_choice = input("Choose a number (1-9) or type 'exit' to quit: ").strip()
+    player_choice = input("Choose a number (1-9) or type 'exit' to quit: ").strip().lower()
 
-    if player_choice.lower() == "exit":
+    if player_choice == "exit":
         print("Bye!")
         break
 
-    if not player_choice.isdigit():
-        print("Invalid input! Please enter a number between 1 and 9.")
+    try:
+        player_choice = int(player_choice)
+        if not (1 <= player_choice <= 9):
+            raise ValueError  
+    except ValueError:
+        print("⚠️ Invalid input! Please enter a number between 1 and 9.")
         continue
 
-    player_choice = int(player_choice)
+    computer_choice = random.randint(1, 9) 
+    print(f"Computer chose: {computer_choice}")
 
-    if player_choice not in choices:
-        print("Invalid number! Choose between 1 and 9.")
-        continue
+    result = "🎯 It's exactly right!" if player_choice == computer_choice else \
+             "⬆️ Too low!" if player_choice < computer_choice else "⬇️ Too high!"
 
-    computer_choice = random.choice(choices)
-    
-    result = "It's exactly right!" if player_choice == computer_choice else \
-             "Too low!" if player_choice < computer_choice else "Too high!"
-    
     print(result)
-
-    
